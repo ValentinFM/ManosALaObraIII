@@ -1,49 +1,46 @@
-import { useState } from 'react';
-import TodoHeader from './components/TodoHeader.jsx';
-import TodoForm from './components/TodoForm.jsx';
-import TodoList from './components/TodoList.jsx';
-import TodoEmpty from "./components/TodoEmpty.jsx";
-
 function App() {
-  const [tasks, setTasks] = useState([]);
-  //agregamos tareas
-  const addTask = (text) => {
-    if (!text.trim()) {
-      return;
-    }
-    const newTask = {
-      id: Date.now(),
-      text,
-      completed: false,
-    };
-    //nuevas arriba, orden inverso
-    setTasks([newTask, ...tasks]);
-  };
-
-  //eliminar tareas
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-  };
-  
-  //completar tareas
-  const toggleTaskCompleted = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
-  };
   return (
-    <div className="container">
-      <TodoHeader />
-      <TodoForm addTask={addTask} />
-      {tasks.length === 0 ? 
-      (<TodoEmpty />) : 
-      (<TodoList tasks={tasks} 
-      deleteTask={deleteTask} 
-      toggleTaskCompleted={toggleTaskCompleted} 
-      />)}
-    </div>
+    <>
+      <div className="container">
+        <h1>LISTA DE TAREAS DE VALENTIN</h1>
+        <div className="input-section">
+          <input type="text" placeholder="Nueva tarea..." />
+          <button className="add-button">Agregar</button>
+        </div>
+        <ul className="task-list">
+          <li>
+            <input type="checkbox" />
+            <span>Tarea N</span>
+            <button className="delete-button">🗑️</button>
+          </li>
+          <li>
+            <input type="checkbox" />
+            <span>Tarea N-1</span>
+            <button className="delete-button">🗑️</button>
+          </li>
+          <li>
+            <input type="checkbox" checked readOnly />
+            <span className="completed">Tarea completada N-2</span>
+            <button className="delete-button">🗑️</button>
+          </li>
+          <li>
+            <input type="checkbox" />
+            <span>Tarea K</span>
+            <button className="delete-button">🗑️</button>
+          </li>
+          <li>
+            <input type="checkbox" />
+            <span>Tarea 2</span>
+            <button className="delete-button">🗑️</button>
+          </li>
+          <li>
+            <input type="checkbox" checked readOnly />
+            <span className="completed">Tarea Completada 1</span>
+            <button className="delete-button">🗑️</button>
+          </li>
+        </ul>
+      </div>
+    </>
   );
 }
 
